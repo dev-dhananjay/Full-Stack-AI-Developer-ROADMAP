@@ -1,0 +1,903 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Full Stack AI Developer Roadmap — Zero to Advanced</title>
+<meta name="description" content="An interactive roadmap to become a Full Stack AI Developer. Track your skills from beginner to pro across 8 phases and 48 topics.">
+<meta property="og:title" content="Full Stack AI Developer Roadmap">
+<meta property="og:description" content="Zero to Advanced — 8 phases, 48 skills, fully interactive. Built for B.Tech students.">
+<meta property="og:type" content="website">
+<style>
+  :root {
+    --bg: #0a0a0a;
+    --bg2: #111111;
+    --bg3: #1a1a1a;
+    --bg4: #222222;
+    --border: rgba(255,255,255,0.08);
+    --border2: rgba(255,255,255,0.14);
+    --border3: rgba(255,255,255,0.22);
+    --text: #f0f0f0;
+    --text2: #a0a0a0;
+    --text3: #666;
+    --green: #22c55e;
+    --green-bg: rgba(34,197,94,0.12);
+    --green-border: rgba(34,197,94,0.3);
+    --yellow: #eab308;
+    --yellow-bg: rgba(234,179,8,0.12);
+    --yellow-border: rgba(234,179,8,0.3);
+    --red: #ef4444;
+    --red-bg: rgba(239,68,68,0.12);
+    --red-border: rgba(239,68,68,0.3);
+    --blue: #3b82f6;
+    --blue-bg: rgba(59,130,246,0.12);
+    --blue-border: rgba(59,130,246,0.3);
+    --accent: #e63946;
+    --radius: 10px;
+    --radius-sm: 6px;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+
+  /* ── GRID BG ── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    position: relative;
+    z-index: 1;
+    padding: 72px 24px 48px;
+    text-align: center;
+    max-width: 700px;
+    margin: 0 auto;
+  }
+
+  .hero-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    background: rgba(230,57,70,0.1);
+    border: 1px solid rgba(230,57,70,0.25);
+    padding: 4px 12px;
+    border-radius: 20px;
+    margin-bottom: 20px;
+  }
+
+  .hero-eyebrow::before { content: '⬡'; font-size: 10px; }
+
+  h1 {
+    font-size: clamp(28px, 6vw, 52px);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    line-height: 1.1;
+    color: #fff;
+    margin-bottom: 16px;
+  }
+
+  h1 span {
+    background: linear-gradient(135deg, #e63946 0%, #ff6b6b 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .hero-sub {
+    font-size: 16px;
+    color: var(--text2);
+    max-width: 480px;
+    margin: 0 auto 32px;
+    line-height: 1.7;
+  }
+
+  .hero-stats {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 12px;
+  }
+
+  .stat-pill {
+    font-size: 12px;
+    font-weight: 500;
+    padding: 5px 14px;
+    border-radius: 20px;
+    border: 1px solid var(--border2);
+    background: var(--bg3);
+    color: var(--text2);
+  }
+
+  /* ── PROGRESS BAR ── */
+  .progress-wrap {
+    position: relative;
+    z-index: 1;
+    max-width: 700px;
+    margin: 0 auto 16px;
+    padding: 0 24px;
+  }
+
+  .progress-meta {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    color: var(--text3);
+    margin-bottom: 8px;
+  }
+
+  #prog-pct { color: var(--green); font-weight: 600; }
+
+  .progress-track {
+    height: 3px;
+    background: var(--bg4);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #22c55e, #86efac);
+    border-radius: 2px;
+    transition: width 0.5s cubic-bezier(0.4,0,0.2,1);
+    width: 0%;
+  }
+
+  /* ── LEGEND ── */
+  .legend {
+    display: flex;
+    justify-content: center;
+    gap: 18px;
+    flex-wrap: wrap;
+    padding: 0 24px 36px;
+    position: relative;
+    z-index: 1;
+    max-width: 700px;
+    margin: 0 auto;
+  }
+
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    color: var(--text3);
+  }
+
+  .legend-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  /* ── MAIN CONTAINER ── */
+  .container {
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 0 16px 80px;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ── CONNECTOR ── */
+  .connector {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 6px 0;
+    color: var(--text3);
+    font-size: 18px;
+    position: relative;
+  }
+
+  .connector::before, .connector::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    width: 1px;
+    height: 6px;
+    background: var(--border2);
+  }
+
+  .connector::before { top: 0; }
+  .connector::after { bottom: 0; }
+
+  /* ── PHASE CARD ── */
+  .phase {
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: var(--bg2);
+    overflow: hidden;
+    transition: border-color 0.2s;
+  }
+
+  .phase:hover { border-color: var(--border2); }
+
+  .phase-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 16px;
+    cursor: pointer;
+    user-select: none;
+    transition: background 0.15s;
+  }
+
+  .phase-header:hover { background: var(--bg3); }
+
+  .phase-badge {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    padding: 3px 9px;
+    border-radius: 20px;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .badge-beginner {
+    background: var(--green-bg);
+    border: 1px solid var(--green-border);
+    color: var(--green);
+  }
+
+  .badge-intermediate {
+    background: var(--yellow-bg);
+    border: 1px solid var(--yellow-border);
+    color: var(--yellow);
+  }
+
+  .badge-advanced {
+    background: var(--red-bg);
+    border: 1px solid var(--red-border);
+    color: var(--red);
+  }
+
+  .badge-pro {
+    background: var(--blue-bg);
+    border: 1px solid var(--blue-border);
+    color: var(--blue);
+  }
+
+  .phase-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: #fff;
+    flex: 1;
+  }
+
+  .phase-subtitle {
+    font-size: 12px;
+    color: var(--text3);
+    flex: 2;
+    display: none;
+  }
+
+  @media(min-width: 480px) { .phase-subtitle { display: block; } }
+
+  .phase-progress-label {
+    font-size: 11px;
+    color: var(--text3);
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .phase-toggle {
+    color: var(--text3);
+    font-size: 12px;
+    transition: transform 0.25s;
+    flex-shrink: 0;
+  }
+
+  .phase-toggle.open { transform: rotate(180deg); }
+
+  /* ── PHASE BODY ── */
+  .phase-body {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s cubic-bezier(0.4,0,0.2,1);
+  }
+
+  .phase-body.open { max-height: 600px; }
+
+  .phase-inner {
+    padding: 0 16px 16px;
+  }
+
+  .phase-desc {
+    font-size: 12px;
+    color: var(--text2);
+    line-height: 1.7;
+    border-top: 1px solid var(--border);
+    padding-top: 12px;
+    margin-bottom: 14px;
+  }
+
+  /* ── NODES GRID ── */
+  .nodes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(145px, 1fr));
+    gap: 7px;
+  }
+
+  .node-card {
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 10px 11px;
+    cursor: pointer;
+    transition: border-color 0.15s, background 0.15s, transform 0.1s;
+    background: var(--bg3);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .node-card:hover {
+    border-color: var(--border3);
+    background: var(--bg4);
+    transform: translateY(-1px);
+  }
+
+  .node-card:active { transform: scale(0.98); }
+
+  .node-card.done {
+    border-color: var(--green-border);
+    background: var(--green-bg);
+  }
+
+  .node-card.done .node-name { color: var(--green); }
+
+  .node-check {
+    position: absolute;
+    top: 8px;
+    right: 9px;
+    font-size: 12px;
+    color: var(--green);
+    opacity: 0;
+    transition: opacity 0.2s;
+  }
+
+  .node-card.done .node-check { opacity: 1; }
+
+  .node-name {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text);
+    line-height: 1.35;
+    margin-right: 14px;
+  }
+
+  .node-tag {
+    font-size: 10px;
+    color: var(--text3);
+    margin-top: 4px;
+    font-weight: 500;
+  }
+
+  /* ── MODAL ── */
+  .modal-bg {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.75);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    padding: 16px;
+    backdrop-filter: blur(4px);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s;
+  }
+
+  .modal-bg.visible {
+    opacity: 1;
+    pointer-events: all;
+  }
+
+  .modal {
+    background: #161616;
+    border: 1px solid var(--border2);
+    border-radius: 14px;
+    padding: 22px;
+    max-width: 380px;
+    width: 100%;
+    position: relative;
+    transform: translateY(12px) scale(0.97);
+    transition: transform 0.25s cubic-bezier(0.34,1.56,0.64,1);
+  }
+
+  .modal-bg.visible .modal {
+    transform: translateY(0) scale(1);
+  }
+
+  .modal-phase-badge {
+    font-size: 10px;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 20px;
+    display: inline-block;
+    margin-bottom: 10px;
+  }
+
+  .modal h3 {
+    font-size: 17px;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 8px;
+    line-height: 1.3;
+  }
+
+  .modal p {
+    font-size: 13px;
+    color: var(--text2);
+    line-height: 1.65;
+    margin-bottom: 14px;
+  }
+
+  .modal-tools-label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text3);
+    margin-bottom: 7px;
+  }
+
+  .modal-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    margin-bottom: 18px;
+  }
+
+  .modal-tag {
+    font-size: 11px;
+    padding: 3px 9px;
+    border-radius: 4px;
+    background: var(--bg4);
+    color: var(--text2);
+    border: 1px solid var(--border2);
+    font-weight: 500;
+  }
+
+  .modal-close {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    background: var(--bg4);
+    border: 1px solid var(--border);
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    cursor: pointer;
+    color: var(--text2);
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.15s;
+  }
+
+  .modal-close:hover { background: var(--bg3); color: #fff; }
+
+  .modal-actions { display: flex; gap: 8px; }
+
+  .btn {
+    flex: 1;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 9px 16px;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    border: 1px solid var(--border2);
+    background: var(--bg4);
+    color: var(--text);
+    transition: background 0.15s, border-color 0.15s, transform 0.1s;
+    text-align: center;
+  }
+
+  .btn:hover { background: var(--bg3); border-color: var(--border3); }
+  .btn:active { transform: scale(0.97); }
+
+  .btn-done {
+    background: var(--green-bg);
+    border-color: var(--green-border);
+    color: var(--green);
+  }
+
+  .btn-done:hover {
+    background: rgba(34,197,94,0.2);
+    border-color: var(--green);
+  }
+
+  .btn-undone {
+    background: var(--red-bg);
+    border-color: var(--red-border);
+    color: var(--red);
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    text-align: center;
+    padding: 32px 24px 48px;
+    font-size: 12px;
+    color: var(--text3);
+    position: relative;
+    z-index: 1;
+    border-top: 1px solid var(--border);
+  }
+
+  footer a {
+    color: var(--accent);
+    text-decoration: none;
+  }
+
+  footer a:hover { text-decoration: underline; }
+
+  /* ── SCROLLBAR ── */
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: var(--bg4); border-radius: 3px; }
+  ::-webkit-scrollbar-thumb:hover { background: var(--border3); }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="hero-eyebrow">The Growth Vault · Free Resource</div>
+  <h1>Full Stack <span>AI Developer</span><br>Roadmap</h1>
+  <p class="hero-sub">A complete path from zero to advanced — 8 phases, 48 skills. Click any topic to track your progress.</p>
+  <div class="hero-stats">
+    <span class="stat-pill">8 Phases</span>
+    <span class="stat-pill">48 Skills</span>
+    <span class="stat-pill">Zero → Pro</span>
+    <span class="stat-pill">Progress saved locally</span>
+  </div>
+</header>
+
+<!-- PROGRESS -->
+<div class="progress-wrap">
+  <div class="progress-meta">
+    <span>Your progress</span>
+    <span id="prog-text">0 / 48 skills — <span id="prog-pct">0%</span></span>
+  </div>
+  <div class="progress-track">
+    <div class="progress-fill" id="prog-fill"></div>
+  </div>
+</div>
+
+<!-- LEGEND -->
+<div class="legend">
+  <div class="legend-item"><div class="legend-dot" style="background:#22c55e"></div>Beginner</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#eab308"></div>Intermediate</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#ef4444"></div>Advanced</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#3b82f6"></div>Pro</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#22c55e;opacity:0.4"></div>Click node to mark done</div>
+</div>
+
+<!-- ROADMAP -->
+<main class="container" id="phases-container"></main>
+
+<!-- FOOTER -->
+<footer>
+  Built for B.Tech students by <a href="https://instagram.com/thegrowthvault" target="_blank">The Growth Vault</a> ·
+  Inspired by <a href="https://roadmap.sh" target="_blank">roadmap.sh</a> ·
+  Progress saves in your browser
+</footer>
+
+<!-- MODAL -->
+<div class="modal-bg" id="modal-bg">
+  <div class="modal" id="modal-box" role="dialog" aria-modal="true" aria-labelledby="m-title">
+    <button class="modal-close" id="modal-close-btn" aria-label="Close">✕</button>
+    <div class="modal-phase-badge" id="m-badge"></div>
+    <h3 id="m-title"></h3>
+    <p id="m-desc"></p>
+    <div class="modal-tools-label">Tools & technologies</div>
+    <div class="modal-tags" id="m-tags"></div>
+    <div class="modal-actions">
+      <button class="btn" id="m-toggle-btn" onclick="toggleFromModal()"></button>
+    </div>
+  </div>
+</div>
+
+<script>
+const phases = [
+  {
+    id:'p1', level:'beginner', badge:'Phase 1 · Beginner',
+    title:'Foundations',
+    subtitle:'Internet, HTML/CSS, Git, Linux, Python',
+    desc:'Build the bedrock. Before AI or frameworks, master how the web works, how code is managed, and how to operate a command line. These skills are non-negotiable — skip them and everything above will feel shaky.',
+    nodes:[
+      {id:'n1',name:'How the Internet works',tag:'Networking',desc:'Understand TCP/IP, DNS, HTTP/HTTPS, client-server model, and how browsers render pages. This is the context for everything you build.',tools:['HTTP','DNS','TCP/IP','CDN']},
+      {id:'n2',name:'HTML & CSS',tag:'Frontend basics',desc:'Semantic HTML5, CSS box model, Flexbox, Grid, responsive design, and accessibility basics. The skeleton and skin of every web app.',tools:['HTML5','CSS3','Flexbox','Grid']},
+      {id:'n3',name:'JavaScript fundamentals',tag:'Core language',desc:'Variables, functions, loops, DOM manipulation, events, fetch API, ES6+ syntax (arrow functions, destructuring, async/await). The only language that runs in the browser.',tools:['JavaScript','ES6+','DOM API']},
+      {id:'n4',name:'Git & GitHub',tag:'Version control',desc:'Commits, branches, merges, pull requests, rebasing, and collaborative workflows. Every professional project uses Git — learn it deeply.',tools:['Git','GitHub','GitLab']},
+      {id:'n5',name:'Linux command line',tag:'Terminal',desc:'File system navigation, permissions, shell scripts, SSH, environment variables, and process management. AI/ML work happens almost entirely in terminal environments.',tools:['Bash','Zsh','SSH','cron']},
+      {id:'n6',name:'Python basics',tag:'Language',desc:'Syntax, data types, functions, OOP, file I/O, virtual environments, and the pip ecosystem. Python is the primary language for AI/ML work — master it.',tools:['Python 3','pip','venv','Poetry']},
+    ]
+  },
+  {
+    id:'p2', level:'beginner', badge:'Phase 2 · Beginner',
+    title:'Core Web Dev',
+    subtitle:'React, Node.js, REST APIs, databases',
+    desc:'Build real full-stack apps. Learn the tools every web developer uses daily — a modern frontend framework, a backend runtime, and databases. You will use all of these when building AI-powered products.',
+    nodes:[
+      {id:'n7',name:'React',tag:'Frontend framework',desc:'Components, props, state, hooks (useState, useEffect, useCallback), context, and React Router. The most widely used frontend framework in the industry.',tools:['React 18','Vite','JSX','React Router']},
+      {id:'n8',name:'Node.js & Express',tag:'Backend runtime',desc:'Event loop, npm, REST API design, middleware, routing, error handling, and building your first server. The foundation for most JS backends.',tools:['Node.js','Express','npm','nodemon']},
+      {id:'n9',name:'SQL & PostgreSQL',tag:'Relational DB',desc:'CRUD queries, JOINs, indexes, transactions, schema design, and normalization. Relational databases power most production apps.',tools:['PostgreSQL','SQL','DBeaver','TablePlus']},
+      {id:'n10',name:'MongoDB / NoSQL',tag:'Document DB',desc:'Collections, documents, aggregation pipelines, schema design trade-offs vs relational. Great for flexible data structures like AI outputs.',tools:['MongoDB','Mongoose','Atlas']},
+      {id:'n11',name:'REST API design',tag:'API patterns',desc:'HTTP verbs, status codes, authentication, pagination, versioning, error responses, and OpenAPI/Swagger documentation.',tools:['Postman','Swagger','REST','Thunder Client']},
+      {id:'n12',name:'TypeScript',tag:'Typed JS',desc:'Types, interfaces, generics, decorators, and integrating TypeScript into both React and Node. Prevents entire classes of bugs in large codebases.',tools:['TypeScript','TSConfig','Zod','tRPC']},
+    ]
+  },
+  {
+    id:'p3', level:'intermediate', badge:'Phase 3 · Intermediate',
+    title:'AI & ML Fundamentals',
+    subtitle:'Math, classical ML, Python data stack',
+    desc:'Understand what makes AI tick. Learn the math and Python libraries that underpin every model you will later build, fine-tune, or deploy. You do not need to be a mathematician — but you need to be comfortable with the concepts.',
+    nodes:[
+      {id:'n13',name:'Linear algebra & calculus',tag:'Math foundations',desc:'Vectors, matrices, dot products, gradients, chain rule, and partial derivatives. These are the math behind backpropagation and neural network training.',tools:['NumPy','SymPy','Khan Academy']},
+      {id:'n14',name:'Statistics & probability',tag:'Math foundations',desc:'Distributions, Bayes theorem, hypothesis testing, correlation, entropy, and information theory. Essential for understanding model evaluation.',tools:['SciPy','statsmodels','Pandas']},
+      {id:'n15',name:'NumPy & Pandas',tag:'Data stack',desc:'Array operations, broadcasting, DataFrames, groupby, merges, and vectorized computation. The bedrock of all Python data work.',tools:['NumPy','Pandas','Jupyter','Polars']},
+      {id:'n16',name:'Data visualisation',tag:'EDA',desc:'Matplotlib, Seaborn, and Plotly for exploratory data analysis. Being able to see your data is as important as processing it.',tools:['Matplotlib','Seaborn','Plotly','Streamlit']},
+      {id:'n17',name:'Scikit-learn',tag:'Classical ML',desc:'Regression, classification, clustering, pipelines, cross-validation, feature engineering, and model evaluation. Classical ML is still widely used in production.',tools:['scikit-learn','joblib','XGBoost','LightGBM']},
+      {id:'n18',name:'Prompt engineering',tag:'LLMs',desc:'Zero-shot, few-shot, chain-of-thought, ReAct, structured output prompting, and prompt injection defense. The skill that bridges developers and LLMs.',tools:['OpenAI API','Claude API','Anthropic docs']},
+    ]
+  },
+  {
+    id:'p4', level:'intermediate', badge:'Phase 4 · Intermediate',
+    title:'AI Integration Layer',
+    subtitle:'LLMs, RAG, embeddings, agents',
+    desc:'The layer where AI meets product. Build applications that use language models intelligently — not just raw API calls, but real-world AI pipelines with retrieval, memory, and agentic behaviour.',
+    nodes:[
+      {id:'n19',name:'OpenAI / Anthropic APIs',tag:'LLM APIs',desc:'Chat completions, tool use / function calling, streaming responses, token management, and cost control. The entry point for building AI products.',tools:['OpenAI','Anthropic','Together AI','Groq']},
+      {id:'n20',name:'LangChain / LlamaIndex',tag:'Orchestration',desc:'Chains, agents, memory, document loaders, retrievers, and output parsers. Frameworks that abstract the complexity of multi-step AI pipelines.',tools:['LangChain','LlamaIndex','Haystack']},
+      {id:'n21',name:'Embeddings & vector search',tag:'Semantic search',desc:'Text embeddings, cosine similarity, approximate nearest neighbour search, and chunking strategies for long documents.',tools:['OpenAI Embeddings','FAISS','Chroma','sentence-transformers']},
+      {id:'n22',name:'RAG systems',tag:'Retrieval AI',desc:'Retrieval-Augmented Generation: ingest, chunk, embed, retrieve, and generate pipeline. The #1 pattern for building accurate AI apps over your own data.',tools:['Pinecone','Weaviate','pgvector','Qdrant']},
+      {id:'n23',name:'Agents & tool use',tag:'Agentic AI',desc:'ReAct agents, planning loops, tool/function calling, and multi-step reasoning. Agents that can browse, code, and take actions autonomously.',tools:['LangGraph','AutoGen','CrewAI','smolagents']},
+      {id:'n24',name:'Streaming & real-time AI',tag:'UX patterns',desc:'Server-sent events, streaming tokens to the UI, abort controllers, and latency UX. Users expect instant feedback — streaming delivers that.',tools:['SSE','WebSockets','Vercel AI SDK','ai npm']},
+    ]
+  },
+  {
+    id:'p5', level:'intermediate', badge:'Phase 5 · Intermediate',
+    title:'Full Stack Architecture',
+    subtitle:'Next.js, auth, cloud, Docker, CI/CD',
+    desc:'Level up from individual features to production-grade full-stack systems. Deploy, secure, scale, and iterate with confidence. This is where many developers plateau — push through it.',
+    nodes:[
+      {id:'n25',name:'Next.js App Router',tag:'Full-stack React',desc:'Server components, server actions, API routes, route handlers, caching strategies, streaming, and deployment on Vercel. The modern full-stack React framework.',tools:['Next.js 14','Vercel','App Router','Turbopack']},
+      {id:'n26',name:'Auth & security',tag:'Security',desc:'JWT, OAuth 2.0, session handling, NextAuth / Clerk, RBAC, secure cookies, and OWASP basics. Security is non-negotiable for any real product.',tools:['NextAuth','Clerk','JWT','bcrypt']},
+      {id:'n27',name:'Prisma / Drizzle ORM',tag:'Database ORM',desc:'Schema definition, migrations, type-safe queries, and database relationships. ORM tools dramatically speed up backend development.',tools:['Prisma','Drizzle','Supabase','PlanetScale']},
+      {id:'n28',name:'Docker & containers',tag:'DevOps',desc:'Images, containers, Dockerfile, Docker Compose, networking, and volumes. Containers make your app run identically everywhere.',tools:['Docker','Docker Compose','Dockerfile']},
+      {id:'n29',name:'Cloud basics (AWS/GCP)',tag:'Cloud platforms',desc:'Compute (EC2/Cloud Run), storage (S3/GCS), managed databases, IAM, and cost awareness. The infrastructure that runs the world.',tools:['AWS','GCP','Railway','Fly.io']},
+      {id:'n30',name:'CI/CD pipelines',tag:'Automation',desc:'GitHub Actions for automated testing, linting, builds, and deployments. Preview environments, environment secrets, and rollback strategies.',tools:['GitHub Actions','Railway','Fly.io','Render']},
+    ]
+  },
+  {
+    id:'p6', level:'advanced', badge:'Phase 6 · Advanced',
+    title:'Deep Learning & Model Training',
+    subtitle:'PyTorch, transformers, fine-tuning',
+    desc:'Go beyond API calls. Understand how models work at the weights level, fine-tune them for specific tasks, and train your own. This is the knowledge that separates AI engineers from AI API consumers.',
+    nodes:[
+      {id:'n31',name:'PyTorch',tag:'Deep learning',desc:'Tensors, autograd, custom datasets, DataLoaders, training loops, GPU acceleration with CUDA. The most widely used deep learning framework in research.',tools:['PyTorch','CUDA','torchvision','Lightning']},
+      {id:'n32',name:'Neural network architectures',tag:'Theory + code',desc:'MLPs, CNNs, RNNs, LSTMs, attention mechanisms, and the transformer architecture from first principles. Understand what you are building on.',tools:['PyTorch','Hugging Face','Karpathy\'s nanoGPT']},
+      {id:'n33',name:'Hugging Face ecosystem',tag:'Model hub',desc:'Transformers library, datasets, tokenizers, pipeline API, model cards, and sharing models publicly. The GitHub for AI models.',tools:['transformers','datasets','tokenizers','PEFT']},
+      {id:'n34',name:'Fine-tuning LLMs',tag:'Training',desc:'Full fine-tune vs LoRA/QLoRA, instruction tuning, chat templates, DPO, and evaluation. Adapt pretrained models to your specific task.',tools:['LoRA','QLoRA','Axolotl','Unsloth','trl']},
+      {id:'n35',name:'Evaluation & benchmarks',tag:'Quality assurance',desc:'Perplexity, BLEU, ROUGE, MMLU, LLM-as-judge patterns, and custom eval harnesses. You cannot improve what you do not measure.',tools:['lm-eval','Ragas','DeepEval','promptfoo']},
+      {id:'n36',name:'Diffusion & image models',tag:'Generative AI',desc:'Stable Diffusion, ControlNet, SDXL, image generation pipelines, LoRA for image models, and ComfyUI for workflows.',tools:['Diffusers','ComfyUI','A1111','FLUX']},
+    ]
+  },
+  {
+    id:'p7', level:'advanced', badge:'Phase 7 · Advanced',
+    title:'AI Product Engineering',
+    subtitle:'LLMOps, safety, multi-modal, inference',
+    desc:'Ship AI products that actually work in production. Reliability, observability, and safety are not after-thoughts — they are the engineering. This is what separates a demo from a real product.',
+    nodes:[
+      {id:'n37',name:'LLMOps & observability',tag:'Production AI',desc:'Tracing, logging, cost tracking, latency monitoring, and debugging AI pipelines in production. You cannot fix what you cannot see.',tools:['LangSmith','W&B','Arize','Helicone']},
+      {id:'n38',name:'Guardrails & AI safety',tag:'Reliability',desc:'Output validation, hallucination detection, moderation APIs, constitutional AI concepts, and prompt injection defense in production.',tools:['Guardrails AI','NeMo Guardrails','Rebuff']},
+      {id:'n39',name:'Multi-modal AI',tag:'Vision + audio',desc:'GPT-4o vision, Whisper speech-to-text, TTS, image + text pipelines, and video understanding with emerging models.',tools:['GPT-4o','Whisper','ElevenLabs','Replicate']},
+      {id:'n40',name:'AI caching & cost control',tag:'Efficiency',desc:'Semantic caching, prompt compression, request batching, model routing between tiers, and token optimization strategies.',tools:['GPTCache','LangChain cache','Portkey']},
+      {id:'n41',name:'Model serving & inference',tag:'Deployment',desc:'vLLM, Ollama, Text Generation Inference, TensorRT, quantization (GGUF, AWQ), and serving trade-offs between latency and throughput.',tools:['vLLM','Ollama','TGI','Modal','RunPod']},
+      {id:'n42',name:'AI system design',tag:'Architecture',desc:'Multi-agent system patterns, orchestration strategies, fallback logic, rate limiting, and designing AI-native UX that handles uncertainty gracefully.',tools:['LangGraph','CrewAI','AutoGen','Temporal']},
+    ]
+  },
+  {
+    id:'p8', level:'pro', badge:'Phase 8 · Pro',
+    title:'Build & Ship',
+    subtitle:'SaaS products, open source, community',
+    desc:'Everything before this was preparation. Now you build, publish, and lead. Ship real products, contribute to the ecosystem, teach others, and establish your expertise in the open. This is where careers are made.',
+    nodes:[
+      {id:'n43',name:'Build an AI SaaS product',tag:'Product',desc:'End-to-end: auth, billing (Stripe), AI features, rate limiting, usage metering, and production deployment. Shipping beats perfection.',tools:['Next.js','Stripe','Vercel','Supabase']},
+      {id:'n44',name:'Open source contributions',tag:'Community',desc:'Contribute to LangChain, Hugging Face, or build your own popular AI library. OSS contributions are the best portfolio for an AI engineer.',tools:['GitHub','OSS','CONTRIBUTING.md']},
+      {id:'n45',name:'Technical content creation',tag:'Brand building',desc:'Write tutorials, publish models to HF Hub, build a developer audience on YouTube / X. Teaching solidifies your own understanding.',tools:['Hashnode','Dev.to','YouTube','X/Twitter']},
+      {id:'n46',name:'MCP & AI tooling',tag:'Ecosystem',desc:'Build Model Context Protocol servers, custom Claude tools, and IDE integrations. MCP is how the next generation of AI apps will be built.',tools:['MCP','Claude','Cursor','Zed']},
+      {id:'n47',name:'AI consulting / freelancing',tag:'Career',desc:'Scope AI projects, price them, ship MVPs fast, and deliver measurable client results. The fastest way to build a portfolio and earn while learning.',tools:['Upwork','Toptal','LinkedIn','Cold outreach']},
+      {id:'n48',name:'Research & frontier papers',tag:'Frontier',desc:'Read arXiv, implement papers from scratch, follow Karpathy and similar researchers, and stay at the cutting edge of the field.',tools:['arXiv','Papers With Code','Semantic Scholar','Karpathy']},
+    ]
+  }
+];
+
+// ── STATE ──
+const STORAGE_KEY = 'fsa_roadmap_v1';
+const done = new Set(JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]'));
+let currentNode = null;
+let currentLevel = 'beginner';
+
+function save() {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify([...done]));
+}
+
+// ── PROGRESS ──
+function updateProgress() {
+  const total = phases.reduce((a, p) => a + p.nodes.length, 0);
+  const c = done.size;
+  const pct = Math.round(c / total * 100);
+  document.getElementById('prog-text').innerHTML =
+    c + ' / ' + total + ' skills — <span id="prog-pct">' + pct + '%</span>';
+  document.getElementById('prog-fill').style.width = pct + '%';
+}
+
+function getPhaseProgress(p) {
+  return p.nodes.filter(n => done.has(n.id)).length + '/' + p.nodes.length;
+}
+
+// ── RENDER ──
+function renderAll() {
+  const container = document.getElementById('phases-container');
+  container.innerHTML = '';
+
+  phases.forEach((p, i) => {
+    // Phase card
+    const phase = document.createElement('div');
+    phase.className = 'phase';
+    phase.id = p.id;
+
+    const isOpen = i === 0;
+
+    phase.innerHTML = `
+      <div class="phase-header" onclick="togglePhase('${p.id}')">
+        <span class="phase-badge badge-${p.level}">${p.badge}</span>
+        <span class="phase-title">${p.title}</span>
+        <span class="phase-subtitle">${p.subtitle}</span>
+        <span class="phase-progress-label" id="prog-${p.id}">${getPhaseProgress(p)}</span>
+        <span class="phase-toggle ${isOpen ? 'open' : ''}" id="tog-${p.id}">▾</span>
+      </div>
+      <div class="phase-body ${isOpen ? 'open' : ''}" id="body-${p.id}">
+        <div class="phase-inner">
+          <p class="phase-desc">${p.desc}</p>
+          <div class="nodes-grid" id="grid-${p.id}"></div>
+        </div>
+      </div>
+    `;
+    container.appendChild(phase);
+    renderNodes(p);
+
+    // Connector arrow between phases
+    if (i < phases.length - 1) {
+      const conn = document.createElement('div');
+      conn.className = 'connector';
+      conn.textContent = '↓';
+      container.appendChild(conn);
+    }
+  });
+}
+
+function renderNodes(p) {
+  const grid = document.getElementById('grid-' + p.id);
+  if (!grid) return;
+  grid.innerHTML = '';
+  p.nodes.forEach(n => {
+    const d = document.createElement('div');
+    d.className = 'node-card' + (done.has(n.id) ? ' done' : '');
+    d.onclick = () => openModal(n, p.level, p.badge);
+    d.innerHTML = `
+      <span class="node-check">✓</span>
+      <div class="node-name">${n.name}</div>
+      <div class="node-tag">${n.tag}</div>
+    `;
+    grid.appendChild(d);
+  });
+}
+
+function togglePhase(id) {
+  const body = document.getElementById('body-' + id);
+  const tog = document.getElementById('tog-' + id);
+  const isOpen = body.classList.contains('open');
+  body.classList.toggle('open', !isOpen);
+  tog.classList.toggle('open', !isOpen);
+}
+
+// ── MODAL ──
+function openModal(n, level, phaseBadge) {
+  currentNode = n;
+  currentLevel = level;
+
+  const badge = document.getElementById('m-badge');
+  badge.textContent = phaseBadge;
+  badge.className = 'modal-phase-badge badge-' + level;
+
+  document.getElementById('m-title').textContent = n.name;
+  document.getElementById('m-desc').textContent = n.desc;
+
+  const tags = document.getElementById('m-tags');
+  tags.innerHTML = n.tools.map(t => `<span class="modal-tag">${t}</span>`).join('');
+
+  const btn = document.getElementById('m-toggle-btn');
+  if (done.has(n.id)) {
+    btn.textContent = '✕  Mark as not done';
+    btn.className = 'btn btn-undone';
+  } else {
+    btn.textContent = '✓  Mark as done';
+    btn.className = 'btn btn-done';
+  }
+
+  document.getElementById('modal-bg').classList.add('visible');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeModal() {
+  document.getElementById('modal-bg').classList.remove('visible');
+  document.body.style.overflow = '';
+  currentNode = null;
+}
+
+function toggleFromModal() {
+  if (!currentNode) return;
+  if (done.has(currentNode.id)) {
+    done.delete(currentNode.id);
+  } else {
+    done.add(currentNode.id);
+  }
+  save();
+  updateProgress();
+
+  phases.forEach(p => {
+    const prog = document.getElementById('prog-' + p.id);
+    if (prog) prog.textContent = getPhaseProgress(p);
+    renderNodes(p);
+  });
+
+  closeModal();
+}
+
+// ── EVENTS ──
+document.getElementById('modal-bg').addEventListener('click', function(e) {
+  if (e.target === this) closeModal();
+});
+
+document.getElementById('modal-close-btn').addEventListener('click', closeModal);
+
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') closeModal();
+});
+
+// ── INIT ──
+renderAll();
+updateProgress();
+</script>
+</body>
+</html>
